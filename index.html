@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าหลัก</title>
+    <link rel="stylesheet" href="styles-head1.css">
+    <link rel="icon" href="icon/inlover.png" type="image/png">
+    <script src="loading.js"></script>
+    <style>
+.sidebar{
+    z-index: 3;
+}
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    z-index: 1000;
+}
+.box-loading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: #000; */
+}
+.box-loading img{
+    width:10rem;
+}
+.loading{
+    /* position: relative; */
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 50px;
+    letter-spacing: 4px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #000, #b8afff, #000);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    animation: animate 1s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes animate {
+    0% {
+        background-position: -500%;
+    }
+    100% {
+        background-position: 500%;
+    }
+}
+
+
+.list-post{
+    padding-left: 120px;
+}
+.list-post img{
+    height: 90vh;
+    /* position: absolute;  */
+    /* bottom: 3rem; */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+div.showindex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+div.showindex p{
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+div.showindex button{
+    background-color: #000;
+    border-radius: 0.5rem;
+    border: none !important;
+    color: white;
+    margin-top: 1rem;
+    padding: 0.3rem;
+    font-size: 1.2rem;
+}
+div.showindex button:hover{
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
+
+/* ปุ่มกดอนุมัติและไม่อนุมัติ */
+    </style>
+</head>
+<body>
+    <!-- เนื้อหาหน้าเว็บของคุณ -->
+    <div id="loading-overlay">
+        <div class="box-loading">
+            <img src="icon/inlover.png" alt="">
+            <p class="loading">In Lover</p>
+        </div>
+        <!-- In Lover -->
+    </div>
+    <!-- Sidebar Menu -->
+    <!-- Sidebar Menu -->
+    <div class="sidebar">
+        <ul class="menu">
+            <span>Menu</span>
+            <!-- <li>
+                <a href="information.html">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <p>profile</p>
+                </a>
+            </li> -->
+            <li>
+                <a href="dashboard-show.html">
+                    <ion-icon name="home-outline"></ion-icon>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <!-- <li>
+                <a href="notifications.html">
+                    <ion-icon name="notifications-outline"></ion-icon>
+                    <p>Notifications</p>
+                </a>
+            </li> -->
+            <li class="likes">
+                <a href="login.html">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <p>Find Partner</p>
+                </a>
+            </li>
+            <li class="likes">
+                <a href="login.html">
+                    <ion-icon name="chatbox-outline"></ion-icon>
+                    <p>Chat</p>
+                </a>
+            </li>
+            <!-- <li class="switch-theme">
+                <a href="#">
+                    <ion-icon name="moon-outline"></ion-icon>
+                    <p>Dark Mode</p>
+                    <button>
+                        <div class="circle"></div>
+                    </button>
+                </a>
+            </li> -->
+            <li>
+                <a href = "mailto:patipan.ar65@snru.ac.th">
+                    <ion-icon name="headset-outline"></ion-icon>
+                    <p>Contact Admin</p>
+                </a>
+            </li>
+            <li>
+                <a href="login.html">
+                    <ion-icon name="log-in-outline"></ion-icon>
+                    <p>Login</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Ionicons -->
+    <script
+        type="module"
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script
+        nomodule
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Add the script to use Ionicons through CDN -->
+    <script
+        type="module"
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script
+        nomodule
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <section class="list-post" >
+        <img src="uploads/showindex1.png" alt="">
+        <div class="showindex">
+            <p>"คนที่ใช่อยู่ที่ไหน มันก็ใช่"</p>
+            <a href="login.html"><button>เริ่มต้นใช้งาน</button></a>
+        </div>
+    </section>
+</body>
+
+
+
+
+

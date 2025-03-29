@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Chat</title>
+</head>
+<body>
+    <div id="chat-box">
+        <!-- แสดงข้อความแชทที่นี่ -->
+    </div>
+    <input type="text" id="message" placeholder="พิมพ์ข้อความของคุณ...">
+    <button onclick="sendMessage()">ส่ง</button>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function sendMessage() {
+            var message = $("#message").val();
+
+            if (message.trim() !== "") {
+                $.post("like-send_message.php", { message: message }, function(data) {
+                    $("#message").val("");
+                    fetchMessages();
+                });
+            }
+        }
+
+        function fetchMessages() {
+            $.get("like-get_messages.php", function(data) {
+                $("#chat-box").html(data);
+            });
+        }
+
+        // เรียกใช้ฟังก์ชันเพื่อแสดงข้อความแชทที่มีอยู่แล้ว
+        fetchMessages();
+
+        // ตั้งเวลาทำซ้ำเพื่อเรียกใช้ฟังก์ชัน fetchMessages ทุก 5 วินาที
+        setInterval(fetchMessages, 5000);
+    </script>
+</body>
+</html>

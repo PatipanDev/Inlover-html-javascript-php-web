@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>like</title>
+    <link rel="stylesheet" href="styles-head1.css">
+    <link rel="icon" href="icon/inlover.png" type="image/png">
+    <style>
+#card-container {
+    /* background-color: #c3cff4; */
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    padding: 10px; /* เพิ่ม Padding เพื่อให้การ์ดไม่ติดขอบ */
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+}
+#card-container .card {
+    background-color: white;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 12rem;  
+    height: 24rem; 
+    padding: 1rem;
+    margin: 0.2rem;
+    /* width: 12rem; */
+    /* height: 24rem; */
+}
+#card-container .card .sec-information{
+    /* background-color: #c3cff4; */
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* เพิ่มข้อมูลสำหรับรูปภาพ */
+#card-container .card  .sec-information .card-img {
+    background-color: white;
+    width: 10rem;
+    height: 12rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    
+}
+
+#card-container .card .sec-information .card-img img {
+    width: 100%;
+    height: auto;
+}
+.list-user{
+    padding-left: 100px;
+}
+/* ส่วนของข้อความที่แสดง */
+.information h3{
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+.information p{
+    /* background-color: #c3cff4; */
+    
+    font-size: 0.8rem;
+}
+/* ปุ่มกดอนุมัติและไม่อนุมัติ */
+
+.allowed-btn{
+    font-size: 0.8rem;
+    border-radius: 4px;
+    height: 1.8rem;
+    font-weight: 600;
+    /* text-transform: uppercase;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear; */
+    padding: 0 30px;
+    background-color: #ffeba7;
+    color: #000000;
+}
+
+.allowed-btn:hover{
+    background-color: #000000;
+    color: #ffeba7;
+    box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
+}
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="information.html">
+            <div id="profile">
+                <!-- Change the src to the URL of the person icon -->
+                <!-- <ion-icon name="person-outline"></ion-icon> -->
+            </div>
+        </a>
+        <ul class="menu">
+            <span>Menu</span>
+            <li>
+                <a href="information.html">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <p>Profile</p>
+                </a>
+            </li>
+            <li>
+                <a href="dashboard.html">
+                    <ion-icon name="home-outline"></ion-icon>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <!-- <li>
+                <a href="notifications.html">
+                    <ion-icon name="notifications-outline"></ion-icon>
+                    <p>Notifications</p>
+                </a>
+            </li> -->
+            <li class="likes">
+                <a href="find-partner.html">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <p>Find Partner</p>
+                </a>
+            </li>
+            <li class="likes">
+                <a href="like-chat.html">
+                    <ion-icon name="chatbox-outline"></ion-icon>
+                    <p>Chat</p>
+                </a>
+            </li>
+            <!-- <li class="switch-theme">
+                <a href="#">
+                    <ion-icon name="moon-outline"></ion-icon>
+                    <p>Dark Mode</p>
+                    <button>
+                        <div class="circle"></div>
+                    </button>
+                </a>
+            </li> -->
+            <li>
+                <a href="chat-admin.html">
+                    <ion-icon name="headset-outline"></ion-icon>
+                    <p>Contact Admin</p>
+                </a>
+            </li>
+            <li>
+                <a href="logout.php">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    <p>Logout</p>
+                </a>
+            </li>
+        </ul>   
+    </div>
+    <!-- Ionicons -->
+    <script
+        type="module"
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script
+        nomodule
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Add the script to use Ionicons through CDN -->
+    <script
+        type="module"
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script
+        nomodule
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+let containerDiv = document.getElementById('profile');
+    fetch('match-img-myself.php')
+        .then(response => response.json())
+        .then(data1 => {
+            data1.forEach(item1 => {
+                const card_like = document.createElement('div');
+                card_like.classList.add('card-show');
+                card_like.innerHTML = `
+                    <div class="img-profile">
+                        <img src="uploads/${item1.image_path || 'profile_none.png'}" alt="${item1.user_name}">
+                    </div>
+                    <p>${item1.user_name}</p>
+                `;
+                containerDiv.appendChild(card_like);
+                // Append the created card to the DOM or perform any other necessary actions
+            });
+        })
+        .catch(error => {
+            console.error('เกิดข้อผิดพลาดในการดึงข้อมูล:', error);
+        });
+    </script>
+        
+    <h3 style="margin-left:120px; padding: 0.5rem; font-size: 1.3rem;">dislike</h3>
+    <section class="list-user" >
+        <div class="card-container" id="card-container">
+            <!-- การ์ดจะถูกสร้างโดย JavaScript -->
+        </div>
+    </section>
+
+
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const cardContainer = document.getElementById('card-container');
+
+    function fetchAndRenderData() {
+        fetch('history-dislike-show.php')
+            .then(response => response.json())
+            .then(data => {
+                // เคลียร์ข้อมูลที่มีอยู่ใน cardContainer
+                cardContainer.innerHTML = '';
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    card.innerHTML = `
+                        <div class="sec-information">
+                            <div class="card-img">
+                                <img src="uploads/${item.image_path}" alt="${item.user_name}">
+                            </div>
+                            <div class="information">
+                                <h3>ชื่อ ${item.user_name} </h3>
+                                <p>ข้อมูลส่วนตัว<p>
+                                <p>ชื่อ ${item.user_name}  อายุ ${item.age} เพศ ${item.gender} น้ำหนัก ${item.weight_us} ส่วนสูง ${item.height}<p>
+                                <p>สถานะปัจจุบัน ${item.status_user}</p>
+                            </div>
+                        </div>
+                        <button class="allowed-btn" type="submit" name="">dismiss like</button>
+                    `;
+                    cardContainer.appendChild(card);
+                    
+                    const allowedBtn = card.querySelector('.allowed-btn');
+                    
+                    allowedBtn.addEventListener('click', function () {
+                        if (confirm("คุณต้องการยกเลิก ใช่หรือไม่?")) {
+                            // หากผู้ใช้กดตกลง ให้เปลี่ยนเส้นทางไปยัง index.html
+                             // เรียกใช้ฟังก์ชันเพื่อลบไฟล์ภาพ
+                            sendUserIDallowed(item.user_id);
+                            // window.location.href = "index.html";
+                        } else {
+                            // หากผู้ใช้กดยกเลิก ไม่ต้องทำอะไร
+                        }
+                    });
+                    
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // เมื่อเริ่มต้นหน้าเว็บโดยใช้ DOMContentLoaded จะดึงและแสดงข้อมูล
+    fetchAndRenderData();
+
+    function sendUserIDallowed(userId) {
+        fetch(`history-dislike-dismiss.php?user_id=${userId}`, {
+            method: 'GET'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            // หลังจากส่งข้อมูลไปยัง user-permission-update.php สามารถทำสิ่งที่ต้องการได้ตามความต้องการ
+            console.log(data);
+            // เมื่อคลิกที่ปุ่ม allowed ให้รีเฟรชหน้าเพื่อแสดงข้อมูลใหม่
+            fetchAndRenderData();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+});
+
+    </script>
+</body>

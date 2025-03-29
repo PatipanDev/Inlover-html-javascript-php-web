@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control</title>
+    <link rel="stylesheet" href="styles-head1.css">
+    <link rel="icon" href="icon/inlover.png" type="image/png">
+    <script>
+        // เมื่อหน้าเว็บโหลดเสร็จ
+        var isLoggedIn = localStorage.getItem('isLoggedIn');
+        console.log(isLoggedIn);
+        // ถ้ายังไม่ได้ล็อกอิน ให้เปลี่ยนเส้นทางไปยังหน้า login.html
+        if (isLoggedIn === 'false') {
+            window.location.href = 'login.html';
+        }else if (isLoggedIn === null || isLoggedIn === undefined || isLoggedIn === ''){
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <!-- Sidebar Menu -->
+    <div class="sidebar">
+        <div class="profile">
+            <!-- Change the src to the URL of the person icon -->
+            <ion-icon name="person-outline"></ion-icon>
+        </div>
+        <ul class="menu">
+            <span>Menu</span>
+            <li>
+                <a href="control.html">
+                    <ion-icon name="home-outline"></ion-icon>
+                    <p>Control</p>
+                </a>
+            </li>
+            <li>
+                <a href="add-event.html">
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                    <p>Add Event</p>
+                </a>
+            </li>
+            <!-- <li>
+                <a href="notifications.html">
+                    <ion-icon name="notifications-outline"></ion-icon>
+                    <p>Notifications</p>
+                </a>
+            </li>  -->
+            <li class="checkbox">
+                <a href="user-permission.html">
+                    <ion-icon name="checkbox-outline"></ion-icon>
+                    <p>User Permission</p>
+                </a>
+            </li>
+            <li class="data_user">
+                <a href="data-user.html">
+                    <ion-icon name="document-outline"></ion-icon>
+                    <p>Data User</p>
+                </a>
+            </li>
+            <li class="Chat">
+                <a href="chat-user.html">
+                    <ion-icon name="chatbox-outline"></ion-icon>
+                    <p>Chat</p>
+                </a>
+            </li>
+            <!-- <li class="switch-theme">
+                <a href="#">
+                    <ion-icon name="moon-outline"></ion-icon>
+                    <p>Dark Mode</p>
+                    <button>
+                        <div class="circle"></div>
+                    </button>
+                </a>
+            </li> -->
+            <!-- <li>
+                <a href="control.html">
+                    <ion-icon name="headset-outline"></ion-icon>
+                    <p>Contact admin</p>
+                </a>
+            </li> -->
+            <li>
+                <a href="logout.php">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    <p>Logout</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Ionicons -->
+    <script
+        type="module"
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script
+        nomodule
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Add the script to use Ionicons through CDN -->
+    <script
+        type="module"
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script
+        nomodule
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
