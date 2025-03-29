@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chat User</title>
+        <link rel="stylesheet" href="styles-head1.css">
+        <link rel="icon" href="icon/inlover.png" type="image/png">
+        <script>
+            // เมื่อหน้าเว็บโหลดเสร็จ
+            var isLoggedIn = localStorage.getItem('isLoggedIn');
+            console.log(isLoggedIn);
+            // ถ้ายังไม่ได้ล็อกอิน ให้เปลี่ยนเส้นทางไปยังหน้า login.html
+            if (isLoggedIn === 'false') {
+                window.location.href = 'login.html';
+            }else if (isLoggedIn === null || isLoggedIn === undefined || isLoggedIn === ''){
+                window.location.href = 'login.html';
+            }
+        </script>
+    </head>
+    <body>
+        <!-- Sidebar Menu -->
+        <div class="sidebar">
+            <div class="profile">
+                <!-- Change the src to the URL of the person icon -->
+                <ion-icon name="person-outline"></ion-icon>
+            </div>
+            <ul class="menu">
+                <span>Menu</span>
+                <!-- <li>
+                    <a href="control.html">
+                        <ion-icon name="home-outline"></ion-icon>
+                        <p>Control</p>
+                    </a>
+                </li> -->
+                <li>
+                    <a href="add-event.html">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        <p>Add Event</p>
+                    </a>
+                </li>
+               <!-- <li>
+                    <a href="notifications.html">
+                        <ion-icon name="notifications-outline"></ion-icon>
+                        <p>Notifications</p>
+                    </a>
+                </li>  -->
+                <li class="checkbox">
+                    <a href="user-permission.html">
+                        <ion-icon name="checkbox-outline"></ion-icon>
+                        <p>User Permission</p>
+                    </a>
+                </li>
+                <li class="data_user">
+                    <a href="data-user.html">
+                        <ion-icon name="document-outline"></ion-icon>
+                        <p>Data User</p>
+                    </a>
+                </li>
+                <li class="Chat">
+                    <a href="chat-user.html">
+                        <ion-icon name="chatbox-outline"></ion-icon>
+                        <p>Chat</p>
+                    </a>
+                </li>
+                <!-- <li class="switch-theme">
+                    <a href="#">
+                        <ion-icon name="moon-outline"></ion-icon>
+                        <p>Dark Mode</p>
+                        <button>
+                            <div class="circle"></div>
+                        </button>
+                    </a>
+                </li> -->
+                <!-- <li>
+                    <a href="control.html">
+                        <ion-icon name="headset-outline"></ion-icon>
+                        <p>Contact admin</p>
+                    </a>
+                </li> -->
+                <li>
+                    <a href="logout.php">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                        <p>Logout</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Ionicons -->
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script
+            nomodule
+            src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <!-- Add the script to use Ionicons through CDN -->
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script
+            nomodule
+            src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+let containerDiv = document.getElementById('profile');
+    fetch('match-img-myself.php')
+        .then(response => response.json())
+        .then(data1 => {
+            data1.forEach(item1 => {
+                const card_like = document.createElement('div');
+                card_like.classList.add('card-show');
+                card_like.innerHTML = `
+                    <div class="img-profile">
+                        <img src="uploads/${item1.image_path || 'profile_none.png'}" alt="${item1.user_name}">
+                    </div>
+                    <p>${item1.user_name}</p>
+                `;
+                containerDiv.appendChild(card_like);
+                // Append the created card to the DOM or perform any other necessary actions
+            });
+        })
+        .catch(error => {
+            console.error('เกิดข้อผิดพลาดในการดึงข้อมูล:', error);
+        });
+    </script>
+    <section class="all-main">
+        <section class="card-all" >
+            <div class="card-container" id="card-container">
+                <!-- การ์ดจะถูกสร้างโดย JavaScript -->
+            </div>
+        </section>
+        <section class="all-chat">
+            <section class="card-all" >
+                <div class="card-container-side" id="card-container-side">
+                    <!-- การ์ดจะถูกสร้างโดย JavaScript -->
+                </div>
+            </section>
+            <section class="chat-contact">
+                <div id="chat-box">
+                    <div class="sent-message">กรุณาเลือก</div>
+                    <div class="received-message">ผู้ใช้งานก่อน</div>
+                    <!-- สร้าง div เพิ่มเติมตามจำนวนข้อความที่ได้รับ -->
+                </div>
+                    <!-- แสดงข้อความแชทที่นี่ -->
+                </div>
+                <div class="group-send">
+                    <input type="text" id="message" placeholder="พิมพ์ข้อความของคุณ...">
+                    <button onclick="sendMessage()" class="send-button">ส่ง</button>
+                </div>
+            </section>
+        </section>
+        <!-- <script src="like-chat-n.js"></script> -->
+    </section>
+    <style>
+.sidebar{
+    z-index: 3;
+}
+
+.all-main{
+    padding: 0;
+    margin:0;
+    padding-left: 100px;
+    height: 100%;
+    width: 100%;
+
+}
+#card-container {
+    background-color: #c3cff4;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /*เพื่อให้สามารถเลื่อน*/
+    overflow-x: hidden;
+    padding: 10px; /* เพิ่ม Padding เพื่อให้การ์ดไม่ติดขอบ */
+    margin: 0;
+    width: 100%;
+}
+#card-container .card {
+    flex: 0 0 auto; /* ไม่ยืดขยายขนาดของการ์ด */
+    /* margin-right: 10px;  */
+    white-space: nowrap; /* ไม่ให้ขึ้นบรรทัดใหม่ */
+    min-width: 5rem; /* ขนาดขั้นต่ำของการ์ด */
+    max-width: 6rem; /* ขนาดสูงสุดของการ์ด */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* เพิ่มข้อมูลสำหรับรูปภาพ */
+#card-container .card-img {
+    width: 4rem;
+    height: 4rem;
+    overflow: hidden;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+#card-container .card-img img {
+    width: 100%;
+    height: auto;
+}
+
+#card-container .card p{
+    text-align: center;
+}
+#card-container .card:hover{
+    opacity: 0.6;
+}
+#card-container .card:active{
+    opacity: 1;
+}
+.all-chat{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+/* ส่วนของแชท */
+.chat-contact{
+    width: 100%;
+}
+/* กล่องแชท */
+#chat-box {
+    width: 100%;
+    overflow-y: auto;
+    max-height: 65vh;
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 0;
+    padding: 2rem;
+}
+
+.sent-message {
+    text-align: right;
+    padding: 8px 12px;
+    margin: 6px 0;
+    border-radius: 12px;
+    float: right;
+    background-color: #6c7eb5;
+    color: white;
+    /* เพิ่มสไตล์เส้นกรอบหรือสีพื้นหลังตามที่ต้องการ */
+    align-self: flex-end; /* ปรับพื้นที่ข้อความให้เท่ากับข้อความนั้นเอง */
+}
+
+.received-message {
+    text-align: left;
+    padding: 8px 12px;
+    margin: 6px 0;
+    border-radius: 12px;
+    float: left;
+    background-color: #f2f2f2;
+    /* เพิ่มสไตล์เส้นกรอบหรือสีพื้นหลังตามที่ต้องการ */
+    align-self: flex-start; /* ปรับพื้นที่ข้อความให้เท่ากับข้อความนั้นเอง */
+}
+
+.received-message {
+    text-align: left;
+    padding: 8px 12px;
+    margin: 6px 0;
+    border-radius: 12px;
+    float: left;
+    background-color: #f2f2f2;
+    /* เพิ่มสไตล์เส้นกรอบหรือสีพื้นหลังตามที่ต้องการ */
+}
+
+div.group-send{
+    display: flex;
+    padding: 0rem 2rem;
+    width: 90%;
+    /* position: relative; */
+}
+
+div.group-send{
+    position: absolute;
+    bottom: 3rem;
+    /* ระยะห่างด้านล่างตามที่คุณต้องการ */
+}
+
+#message{
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 10px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.send-button {
+    font-size: 1.2rem;
+    background-color: #000000;
+    color: white;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+        
+        function sendMessage() {
+            var message = $("#message").val();
+
+            if (message.trim() !== "") {
+                $.post("chat-user-send.php", { message: message }, function(data) {
+                    $("#message").val("");
+                    fetchMessages();
+                });
+            }
+        }
+
+        function fetchMessages() {
+            $.get("chat-user-get.php", function(data) {
+                var messages = JSON.parse(data);
+
+                // ทำสิ่งที่คุณต้องการกับ messages ที่ได้ เช่น แสดงใน chat-box
+                $("#chat-box").empty(); // ล้างข้อมูลเดิมทิ้ง
+
+                messages.forEach(function(message) {
+                    var messageClass = (message.sender === 'me') ? 'sent-message' : 'received-message';
+                    $("#chat-box").append('<div class="' + messageClass + '" style="font-size: 1.2rem;"><span class="timestamp" style="font-size: 0.7rem;">' + message.timestamp + '</span><p class="content">' + message.message_send + '</p></div>');
+                });
+            });
+        }
+
+        // เรียกใช้ฟังก์ชันเพื่อแสดงข้อความแชทที่มีอยู่แล้ว
+        fetchMessages();
+
+        // ตั้งเวลาทำซ้ำเพื่อเรียกใช้ฟังก์ชัน fetchMessages ทุก 5 วินาที
+        setInterval(fetchMessages, 5000);
+    </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const cardContainer = document.getElementById('card-container');
+    fetch('chat-user-img.php')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = `
+                    <div class="card-img">
+                        <img src="uploads/${item.image_path}" alt="${item.user_name}">
+                    </div>
+                    <p>${item.user_name}</p>
+                    </div>
+                `;
+                
+                 // เพิ่มอีเวนท์ click ที่ card
+                card.addEventListener('click', function () {
+                    fetchMessages();
+                    // ทำสิ่งที่คุณต้องการเมื่อคลิกที่ card
+                    console.log(`Clicked on card for user: ${item.user_id}`);
+                    fetch('chat-user-select.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ user_id: item.user_id })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // ทำสิ่งที่คุณต้องการหลังจากการส่งข้อมูล
+                        console.log(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                });
+                cardContainer.appendChild(card);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const cardContainer = document.getElementById('card-container');
+    let isMouseDown = false;
+    let startX, scrollLeft;
+
+    cardContainer.addEventListener('mousedown', function (e) {
+        isMouseDown = true;
+        startX = e.pageX - cardContainer.offsetLeft;
+        scrollLeft = cardContainer.scrollLeft;
+    });
+
+    cardContainer.addEventListener('mouseleave', function () {
+        isMouseDown = false;
+    });
+
+    cardContainer.addEventListener('mouseup', function () {
+        isMouseDown = false;
+    });
+
+    cardContainer.addEventListener('mousemove', function (e) {
+        if (!isMouseDown) return;
+        e.preventDefault();
+        const x = e.pageX - cardContainer.offsetLeft;
+        const walk = (x - startX) * 3; // ความเร็วในการเลื่อน
+        cardContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // ... โค้ดอื่น ๆ ที่คุณมี
+});
+
+    </script>
+</body>
+</html>

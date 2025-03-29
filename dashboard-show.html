@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าหลัก</title>
+    <link rel="icon" href="icon/inlover.png" type="image/png">
+    <link rel="stylesheet" href="styles-head1.css">
+    <style>
+#card-container {
+    /* background-color: #c3cff4; */
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: auto;
+    padding: 1rem; /* เพิ่ม Padding เพื่อให้การ์ดไม่ติดขอบ */
+    margin: 0;
+    width: 100%;
+    height: 93vh;
+}
+#card-container .card {
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: row;
+    /* flex-direction: column-reverse; */
+    padding: 2rem; /* ระยะห่างระหว่างการ์ด */
+    /* margin: 2rem; */
+    width: 100%; /* ขนาดขั้นต่ำของการ์ด */
+}
+
+
+/* เพิ่มข้อมูลสำหรับรูปภาพ */
+#card-container .card-img {
+    width: 50rem;
+    height: 22rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+
+}
+#card-container .card-img img {
+    width: auto;
+    height: 100%;
+}
+.list-post{
+    padding-left: 100px;
+}
+.list-post h1{
+    padding: 0.5rem 3rem;
+}
+/* ส่วนของข้อความที่แสดง */
+.information{
+    width: 30rem;
+    padding: 0rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.information h2{
+    font-size: 1.5rem;
+}
+
+.information p{
+    padding: 0.1rem 0rem;
+    font-size: 1.1rem;
+}
+
+/* ปุ่มกดอนุมัติและไม่อนุมัติ */
+    </style>
+</head>
+<body>
+    <!-- Sidebar Menu -->
+    <div class="sidebar">
+        <ul class="menu">
+            <span>Menu</span>
+            <li>
+                <a href="dashboard-show.html">
+                    <ion-icon name="home-outline"></ion-icon>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <!-- <li>
+                <a href="notifications.html">
+                    <ion-icon name="notifications-outline"></ion-icon>
+                    <p>Notifications</p>
+                </a>
+            </li> -->
+            <li class="likes">
+                <a href="login.html">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <p>Find Partner</p>
+                </a>
+            </li>
+            <li class="likes">
+                <a href="login.html">
+                    <ion-icon name="chatbox-outline"></ion-icon>
+                    <p>Chat</p>
+                </a>
+            </li>
+            <li>
+                <a href = "mailto:patipan.ar65@snru.ac.th">
+                    <ion-icon name="headset-outline"></ion-icon>
+                    <p>Contact Admin</p>
+                </a>
+            </li>
+            <li>
+                <a href="login.html">
+                    <ion-icon name="log-in-outline"></ion-icon>
+                    <p>Login</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Ionicons -->
+    <script
+        type="module"
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script
+        nomodule
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Add the script to use Ionicons through CDN -->
+    <script
+        type="module"
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script
+        nomodule
+        src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <section class="list-post" >
+        <h1>กิจกรรม</h1>
+        <div class="card-container" id="card-container">
+            <!-- การ์ดจะถูกสร้างโดย JavaScript -->
+        </div>
+    </section>
+</body>
+<script>
+let containerDiv = document.getElementById('profile');
+    fetch('match-img-myself.php')
+        .then(response => response.json())
+        .then(data1 => {
+            data1.forEach(item1 => {
+                const card_like = document.createElement('div');
+                card_like.classList.add('card-show');
+                card_like.innerHTML = `
+                    <div class="img-profile">
+                        <img src="uploads/${item1.image_path || 'profile_none.png'}" alt="${item1.user_name}">
+                    </div>
+                    <p>${item1.user_name}</p>
+                `;
+                containerDiv.appendChild(card_like);
+                // Append the created card to the DOM or perform any other necessary actions
+            });
+        })
+        .catch(error => {
+            console.error('เกิดข้อผิดพลาดในการดึงข้อมูล:', error);
+        });
+// let containerDiv = document.getElementById('profile');
+// fetch('match-img-myself.php')
+//     .then(response => response.json())
+//     .then(data1 => {
+//         data1.forEach(item1 => {
+//             const card_like = document.createElement('div');
+//             card_like.classList.add('card-show');
+//             const imagePath = item1.image_path ? `uploads/${item1.image_path}` : 'profile_none.png';
+//             card_like.innerHTML = `
+//                 <div class="img-profile">
+//                     <img src="${imagePath}" alt="${item1.user_name}">
+//                 </div>
+//                 <p>${item1.user_name}</p>
+//             `;
+//             containerDiv.appendChild(card_like);
+//             // Append the created card to the DOM or perform any other necessary actions
+//         });
+//     })
+    // .catch(error => {
+    //     console.error('เกิดข้อผิดพลาดในการดึงข้อมูล:', error);
+    // });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const cardContainer = document.getElementById('card-container');
+
+    function fetchAndRenderData() {
+        fetch('dashboard-show.php')
+            .then(response => response.json())
+            .then(data => {
+                // เคลียร์ข้อมูลที่มีอยู่ใน cardContainer
+                cardContainer.innerHTML = '';
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    card.innerHTML = `
+                        <div class="card-img">
+                            <img src="${item.post_image}" alt="${item.post_image}">
+                        </div>
+                        <div class="information">
+                            <div>
+                                <h2 id="texth" name="texth">${item.post_texth}</h2>
+                                <p id="text" name="text">${item.post_text}</p>
+                            </div>
+                            <p>${item.post_time}</p>
+                        </div>
+                    `;
+                    cardContainer.appendChild(card);
+                    
+                    // const editBtn = card.querySelector('.edit-btn');
+                    // const deleteBtn = card.querySelector('.delete-btn');
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // เมื่อเริ่มต้นหน้าเว็บโดยใช้ DOMContentLoaded จะดึงและแสดงข้อมูล
+    fetchAndRenderData();
+});
+</script>
+
+
+
+
