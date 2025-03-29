@@ -1,3 +1,7 @@
 #file uploads all
-uploads/
-uploads_post/
+uploads/*
+uploads_post/*
+
+# But keep .gitkeep
+!uploads/.gitkeep
+!uploads_post/.gitkeep
