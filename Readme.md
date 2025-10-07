@@ -66,3 +66,14 @@ inlover/
 
 เปิดเบราว์เซอร์และเข้าไปที่  
 👉 [http://localhost/[PORT]](http://localhost/inlover)
+
+## Use Case Diagram
+
+![use case diagram](./images_project/use_case_diagram.png)
+
+
+
+![หน้าล็อกอิน](./images_project/screen_match.png)
+![หน้าล็อกอิน](./images_project/screen_login.png)
+![หน้าคนที่กดชอบ](./images_project/screen_like.png)
+![หน้าจออนุญาติสิทธิ์](./images_project/screen_alowed.png)
